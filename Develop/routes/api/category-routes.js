@@ -5,33 +5,28 @@ const { Category, Product, Tag } = require('../../models');
 
 router.get('/', (req, res) => {
   // find all categories
-  Tag.findAll(
+  Category.findAll(
     // be sure to include its associated Products
     {
-      include: {
+      include: [{
         model: Product,
         attributes: ['product_name']
-      }
+      }]
     }
   )
-  .then(tagData => res.json(tagData))
+  .then(categoryData => res.json(categoryData))
   .catch(err =>{
     console.log(err)
-    res.status(500).json("an error occured", err);
+    res.status(500).json(err);
     });
 });
 
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
-  Category.findOne({
-    where: {
-      id: req.params.id
-    },
+  Category.findByPk(req.params.id, {
     // be sure to include its associated Products
-    include: [{
-      model: Product
-    }]
-  })
+    include: [{model: Product}]
+  });
 });
 
 router.post('/', (req, res) => {
@@ -47,13 +42,10 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
-  Category.update(
-    {
-      category_name: req.body.category_name
-    },
+  Category.update(req.body,
     {
       where:{
-        id: req.params.book_id,
+        id: req.params.id,
       },
     }
   )

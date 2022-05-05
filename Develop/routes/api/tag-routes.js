@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
-
 router.get('/', (req, res) => {
   // find all tags
   Tag.findAll(
@@ -16,7 +15,7 @@ router.get('/', (req, res) => {
   .then(tagData => res.json(tagData))
   .catch(err =>{
     console.log(err)
-    res.status(500).json("an error occured", err);
+    res.status(500).json(err);
     });
 });
 

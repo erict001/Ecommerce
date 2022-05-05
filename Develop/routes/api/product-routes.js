@@ -22,17 +22,14 @@ router.get('/', (req, res) => {
   .then(productData => res.json(productData))
   .catch(err =>{
     console.log(err)
-    res.status(500).json("an error occured", err);
+    res.status(500).json(err);
     });
 });
 
 // get one product
 router.get("/:id", (req, res) => {
-  Product.findOne({
+  Product.findByPk(req.body, {
     // be sure to include its associated Category and Tag data
-    where: {
-      id: req.params.id
-    },
       include: [{
         model: Category,
         attributes: ['category_name']
@@ -48,7 +45,7 @@ router.get("/:id", (req, res) => {
   })
   .catch(err => {
       console.log(err);
-      res.status(500).json({msg: "an error occured", err})
+      res.status(500).json(err)
   });
 });
 

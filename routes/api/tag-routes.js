@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     // be sure to include its associated Product data
     {
       include: {
-        model: Product
+        model: Product,
       }
     }
   )
@@ -19,17 +19,23 @@ router.get('/', (req, res) => {
     });
 });
 
+
+// get one product
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
-  Tag.findOne({
-    where: {
-      id: req.params.id
-    },
-    // be sure to include its associated Product data
-    include: {
-      model: Product
-    }
-  })
+  Tag.findOne(
+    {
+      // be sure to include its associated Category and Tag data
+      include: [{
+        model: Product,
+      },
+    ]
+    })
+  .then(productData => res.json(productData))
+  .catch(err =>{
+    console.log(err)
+    res.status(500).json(err);
+    });
 });
 
 // create a new tag

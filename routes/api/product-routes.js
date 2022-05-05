@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
       },
       {
         model: Tag,
-        attributes: ['tag_name']
+        attributes: ['id']
       },
     ]
     })
@@ -27,26 +27,26 @@ router.get('/', (req, res) => {
 });
 
 // get one product
-router.get("/:id", (req, res) => {
-  Product.findByPk(req.body, {
-    // be sure to include its associated Category and Tag data
+router.get('/:id', (req, res) => {
+  // find a single tag by its `id`
+  Product.findOne(
+    {
+      // be sure to include its associated Category and Tag data
       include: [{
         model: Category,
         attributes: ['category_name']
       },
       {
-        include: Tag,
-        attributes: ['tag_name']
-      }
+        model: Tag,
+        attributes: ['id']
+      },
     ]
-  })
-  .then(products => {
-      res.json(products)
-  })
-  .catch(err => {
-      console.log(err);
-      res.status(500).json(err)
-  });
+    })
+  .then(productData => res.json(productData))
+  .catch(err =>{
+    console.log(err)
+    res.status(500).json(err);
+    });
 });
 
 // create new product

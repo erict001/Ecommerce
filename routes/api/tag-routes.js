@@ -40,7 +40,10 @@ router.get('/:id', (req, res) => {
 
 // create a new tag
 router.post('/', (req, res) => {
-  Tag.create(req.body)
+  Tag.create(
+    {
+      tag_name: req.body.tag_name
+    })
   .then((tagName) => {
     res.json(tagName)
   })
@@ -57,7 +60,7 @@ router.put('/:id', (req, res) => {
     },
     {
       where:{
-        id: req.params.book_id,
+        id: req.params.id,
       },
     }
   )

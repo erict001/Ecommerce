@@ -31,6 +31,10 @@ router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   Product.findOne(
     {
+      where: 
+      {
+        id: req.params.id
+      },
       // be sure to include its associated Category and Tag data
       include: [{
         model: Category,
@@ -84,9 +88,10 @@ router.post('/', (req, res) => {
 // update product
 router.put('/:id', (req, res) => {
   // update product data
-  Product.update(req.body, {
-    where: {
-      id: req.params.id,
+  Product.update(req.body, 
+  {
+    where:{
+      id: req.params.id
     },
   })
     .then((product) => {

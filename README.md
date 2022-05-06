@@ -21,7 +21,12 @@ You will also need to fill out a .env file to allow the program to run your code
 
 
 ## Usage
-Create a MySQL database on your local machine using the schema.sql file located in the /db/ directory(From the MySQL CLI, source db/schema.sql), Seed the database with sample data to be used for testing purposes(Run npm run seed from inside the root directory of the project)
+
+https://drive.google.com/file/d/1qr6FaGVTnlX2YvsPpi_kwgpT7255UCXC/view?usp=sharing
+
+Create a MySQL database on your local machine using the schema.sql file located in the /db/ directory(From the MySQL CLI, source db/schema.sql) 
+
+Seed the database with sample data to be used for testing purposes(Run npm run seed from inside the root directory of the project)
 
 ## Credits
 I collaborated with my tutor, Ben Lopez, to help start my project. 
